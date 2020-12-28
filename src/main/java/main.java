@@ -23,6 +23,10 @@ public  class main {
         Utils utils = new Utils();
         Utils utils2 = new Utils();
 
+        String str = "avbkjd1122klj4 54.3 af";
+        System.out.println(extractInt(str));
+
+
       /*  Int1 proxy = (Int1) Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[]{Int1.class, Int2.class},
                 new InvocationHandler() {
                     @Override
@@ -207,6 +211,29 @@ xxx=10;
        // vv.demarrer();
       //  vv.arreter();
     }
+
+
+    static String extractInt(String str)
+    {
+        // Replacing every non-digit number
+        // with a space(" ")
+        str = str.replaceAll("[^\\d]", " ");
+
+        // Remove extra spaces from the beginning
+        // and the ending of the string
+        str = str.trim();
+
+        // Replace all the consecutive white
+        // spaces with a single space
+        str = str.replaceAll(" +", " ");
+
+        if (str.equals(""))
+            return "-1";
+
+        return str;
+    }
+
+
 
 
     public static List< String> getListOfStrings(List <Integer> integerList,ReferenceTest testFunction){

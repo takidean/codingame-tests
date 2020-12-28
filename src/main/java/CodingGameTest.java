@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -16,7 +17,10 @@ public class CodingGameTest {
     public static void main(String args[])   {
 
         //binary search for sorted arrays
-
+System.out.println(computeJoin(471,480));
+System.out.println(677/1000);
+        //BigDecimal b = new BigDecimal("0");
+        System.out.println(predictCrimes());
         SimpleDateFormat formatter1=new SimpleDateFormat("dd/MM/yyyy");
 
         ArrayList l = new ArrayList(2);
@@ -259,12 +263,31 @@ return 0;
        */
    }
 
+    public static int computeJoin(int s1,int s2){
+       boolean notyet=true;
+       Integer p1=s1;
+       Integer p2=s2;
+       while(notyet && p1<20000000){
+           final int[] ints2 = Stream.of(p1.toString().split(""))
+                   .mapToInt(Integer::parseInt)
+                   .toArray();
+           final int[] ints1 = Stream.of(p2.toString().split(""))
+                   .mapToInt(Integer::parseInt)
+                   .toArray();
+
+           p1=p1+IntStream.of(ints2).map(Integer::valueOf).sum();
+           p2=p2+IntStream.of(ints1).map(Integer::valueOf).sum();
+       if(p1==p2) notyet=false;
+       }
+       return p1;
+    }
+
    public static boolean isTwiin(String a,String b){
        char[] t1=a.toUpperCase().toCharArray();
        char[] t2=b.toUpperCase().toCharArray();
        Arrays.sort(t1);
        Arrays.sort(t2);
-       return  Arrays.equals(t1,t2);
+        return  Arrays.equals(t1,t2);
    }
 
     static char  ScanChar(String art)
@@ -315,6 +338,27 @@ return 0;
         c.coin10=coin10;
         return c;
    }
+
+
+
+
+    public static String predictCrimes() {
+        String crime="";
+        for(int i=0;i<30;i++){
+            String TimestampString=""+System.currentTimeMillis();
+            Integer firstPart=(int)Math.floor(Math.random() * 1001);
+            while(firstPart/100==0){firstPart*=10;}
+
+            String crimePart2=TimestampString.substring(3,5);
+            String crimePart3=TimestampString.substring(4,8);
+            // It's your turn to play!
+            crime += "Crime predicted: "+firstPart+"-"+crimePart2+"-"+crimePart3+"\n";
+            Integer lastPart =(int)Math.floor(Math.random() * 10000)+1;
+            while(lastPart/1000==0){lastPart*=10;}
+            crime+="Calling: 1-"+TimestampString.substring(7,10)+"-555-"+lastPart+"\n";
+        }
+        return crime;
+    }
 
 
    public static int closestToZero(int[]values){
